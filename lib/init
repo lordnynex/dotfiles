@@ -48,7 +48,7 @@ function copy_test() {
 }
 function copy_do() {
   e_success "Copying ~/$1."
-  # cp "$2" ~/
+  cp "$2" ~/
 }
 
 # Link files.
@@ -58,7 +58,7 @@ function link_test() {
 }
 function link_do() {
   e_success "Linking ~/$1."
-  # ln -sf ${2#$HOME/} ~/
+  ln -sf ${2#$HOME/} ~/
 }
 
 # Copy, link, init, etc.
