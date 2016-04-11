@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# export DOTFILES=~/.dotfiles
+
+# Bootstrap libs
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../lib/bootstrap" || exit $?
+
+# If the script is bieng sourced, bail.
+# This way we do not squelch warnings
+# to console about flags being already
+# declared.
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+  dotfile_source "${@:2}"
+  return
+fi
+
+# Define flags
+DEFINE_boolean 'debug' false 'enable debug mode' 'd'
+
+# Help message
+FLAGS_HELP=`cat <<EOF
+commands:
+  init      Initialize dotfiles
+  source    Source dotfiles (called by .bashrc)
+  update    Update dotfiles from git repo
+EOF`
+
+# parse the command-line
+FLAGS "$@" || exit 1
+eval set -- "${FLAGS_ARGV}"
+
+command=$1
+case ${command} in
+  '') dotfile_die ;;
+
+  init)
+    dotfile_init "${@:2}"
+    ;;
+
+  source)
+    dotfile_source "${@:2}"
+    ;;
+
+  update)
+    dotfile_update "${@:2}"
+    ;;
+
+  *) dotfile_die "unrecognized command (${command})" ;;
+esac

@@ -1,0 +1,37 @@
+DOT_BOOTSTRAP_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
+
+###########################################
+# Bootstrap utilities
+###########################################
+
+# Pull in shflags
+source "${DOT_BOOTSTRAP_LOC}/shflags" || exit $?
+
+# Pull in utils
+source "${DOT_BOOTSTRAP_LOC}/utils" || exit $?
+
+# Anchor
+export DOTFILE_REPO_ROOT=$(abs_dirname "$DOT_BOOTSTRAP_LOC/../")
+export DOTFILES=$(abs_dirname "$DOT_BOOTSTRAP_LOC/../")
+
+dotfile_check_dirs
+
+###########################################
+# Commands
+###########################################
+
+# dotfiles source
+function dotfile_source() {
+  echo "Source"
+  return
+}
+
+# dotfiles init
+function dotfile_init() {
+  source "${DOT_BOOTSTRAP_LOC}/init"
+}
+
+# dotfiles update
+function dotfile_update() {
+  echo "Update"
+}
