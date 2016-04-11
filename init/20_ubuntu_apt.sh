@@ -52,6 +52,7 @@
 #   sl
 #   telnet
 #   tree
+#   libnotify-bin
 # )
 #
 # packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
